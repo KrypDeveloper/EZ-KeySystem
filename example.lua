@@ -2,7 +2,7 @@ local KeySys = loadstring(game:HttpGet("https://raw.githubusercontent.com/KrypDe
 
 KeySys.Main({
   HubName = "TEST",
-  Discord = "https://discord.gg/codexlol"
+  Discord = "https://discord.gg/codexlol",
   Service = "pandadevkit",
   CustomTextBoxMessage = nil, --put a string if u want
   Premium = false,
