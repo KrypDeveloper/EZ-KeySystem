@@ -1,4 +1,4 @@
-local KeySys = loadstring(game:HttpGet("https"))()
+local KeySys = loadstring(game:HttpGet("https://raw.githubusercontent.com/KrypDeveloper/EZ-KeySystem/main/EzKeySystemMain.lua"))()
 
 KeySys.Main({
   HubName = "TEST",
