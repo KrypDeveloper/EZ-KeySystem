@@ -3,7 +3,7 @@ local KeySys = loadstring(game:HttpGet("https://raw.githubusercontent.com/KrypDe
 KeySys.Main({
   HubName = "TEST",
   PandaAuth = loadstring(game:HttpGet('https://raw.githubusercontent.com/Panda-Repositories/PandaKS_Libraries/main/library/LuaLib/ROBLOX/PandaBetaLib.lua'))(),
-  Discord = "https://discord.gg/codexlol"
+  Discord = "https://discord.gg/codexlol",
   Service = "pandadevkit",
   CustomTextBoxMessage = nil, --put a string if u want
   KeylessSettings = {
