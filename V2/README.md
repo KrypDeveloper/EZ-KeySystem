@@ -1,0 +1,1 @@
+# CHECK example.lua
