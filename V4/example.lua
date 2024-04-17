@@ -1,5 +1,5 @@
 local Theme = "Maggix"
-local KeySys = loadstring(game:HttpGet("https://raw.githubusercontent.com/KrypDeveloper/EZ-KeySystem/main/V4/Manager.lua"))().GetSelector(Theme)
+local KeySys = loadstring(game:HttpGet("https://raw.githubusercontent.com/KrypDeveloper/EZ-KeySystem/main/V4/src/Manager.lua"))().GetSelector(Theme)
 
 KeySys.Main({
   HubName = "TEST",
