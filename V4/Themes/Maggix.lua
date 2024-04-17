@@ -415,7 +415,8 @@ end
 				Notif.New("Your executor doesn't support setclipboard.", 2)
 			end
 		end)
-	
+		end
+	end
 end
 
 return KeySystemUI
