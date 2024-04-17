@@ -1,4 +1,3 @@
-local finishedKey = false
 KeySystemUI = {}
 local UIMade = false
 local UserInputService = game:GetService("UserInputService")
@@ -7,7 +6,7 @@ local HttpService = game:GetService("HttpService")
 if writefile and readfile then
 return
 else
-print("no suppodt for filesystem")
+print("no support for filesystem")
 local httprequest = (syn and syn.request)
 	or (http and http.request)
 	or http_request
