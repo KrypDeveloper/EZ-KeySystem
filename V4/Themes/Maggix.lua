@@ -207,13 +207,13 @@ function KeySys.Main(tabela)
 				Notif.New("Invalid/Expired key!", 2)
 				text_box.Text = ""
 			end
-		end)
+                end
 
 		check_key.MouseButton1Click:Connect(keyValid)
 
 		get_key.MouseButton1Click:Connect(function()
 			text_box.Text = tabela.PandaAuth:GetKey()
-				setclipboard(tabela.PandaAuth:GetKey())
+				setclipboard(tabela.PandaAuth:GetKey(tabela.Service))
 				Notif.new("Copied URL to paste into your browser.", 2)
 			
 				--Notif.new("Your executor doesn't support setclipboard.", 2)
