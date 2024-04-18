@@ -1,147 +1,18 @@
-KeySystemUI = {}
-local UIMade = false
-local UserInputService = game:GetService("UserInputService")
-local CoreGUI = game:GetService("CoreGui")
-local HttpService = game:GetService("HttpService")
-if writefile and readfile then
-return
-else
-print("no support for filesystem")
-local httprequest = (syn and syn.request)
-	or (http and http.request)
-	or http_request
-	or (fluxus and fluxus.request)
-	or request
-	or HttpPost
-local HIDEUI = get_hidden_gui or gethui
-if syn and typeof(syn) == "table" and RenderWindow then
-	syn.protect_gui = gethui
-end
-local RemoveStringsInvite = { "discord.gg", "discord.com/invite" }
-local function JoinDiscord(DiscordInvite)
-	if setclipboard then
-		setclipboard(DiscordInvite)
-	end
-	if httprequest then
-		for _, v in pairs(RemoveStringsInvite) do
-			DiscordInvite = string.gsub(DiscordInvite, "https://", "")
-			DiscordInvite = string.gsub(DiscordInvite, "http://", "")
-			DiscordInvite = string.gsub(DiscordInvite, v .. "/", "")
-			DiscordInvite = string.gsub(DiscordInvite, v, "")
-		end
-		httprequest({
-			Url = "http://127.0.0.1:6463/rpc?v=1",
-			Method = "POST",
-			Headers = {
-				["Content-Type"] = "application/json",
-				["Origin"] = "https://discord.com",
-			},
-			Body = HttpService:JSONEncode({
-				cmd = "INVITE_BROWSER",
-				args = {
-					code = DiscordInvite,
-				},
-				nonce = HttpService:GenerateGUID(false),
-			}),
-		})
-	end
-end
-local function Validate(Values, options)
-	for i, v in pairs(Values) do
-		if options[i] == nil then
-			options[i] = v
-		end
-	end
-
-	return options
-end
-local function Hide_UI(gui)
-	if HIDEUI then
-		gui["Parent"] = HIDEUI()
-	elseif (not is_sirhurt_closure) and (syn and syn.protect_gui) then
-		syn.protect_gui(gui)
-		gui["Parent"] = CoreGUI
-	elseif CoreGUI:FindFirstChild("RobloxGui") then
-		gui["Parent"] = CoreGUI.RobloxGui
-	else
-		gui["Parent"] = CoreGUI
-	end
-end
+KeySys = {}
 local function MakeDraggable(gui)
-	local dragging
-	local dragInput
-	local dragStart
-	local startPos
-	local function update(input)
-		local delta = input.Position - dragStart
-		gui.Position =
-			UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-	end
-	gui.InputBegan:Connect(function(input)
-		if
-			input.UserInputType == Enum.UserInputType.MouseButton1
-			or input.UserInputType == Enum.UserInputType.Touch
-		then
-			dragging = true
-			dragStart = input.Position
-			startPos = gui.Position
-
-			input.Changed:Connect(function()
-				if input.UserInputState == Enum.UserInputState.End then
-					dragging = false
-				end
-			end)
-		end
-	end)
-	gui.InputChanged:Connect(function(input)
-		if
-			input.UserInputType == Enum.UserInputType.MouseMovement
-			or input.UserInputType == Enum.UserInputType.Touch
-		then
-			dragInput = input
-		end
-	end)
-
-	UserInputService.InputChanged:Connect(function(input)
-		if input == dragInput and dragging then
-			update(input)
-		end
-	end)
+	gui.Active = true
+	gui.Selectable = true
+	gui.Draggable = true
 end
 
--- Notify Lib by mr.xrer
--- License: https://api-sirclub.onrender.com/scripts/raw/license
-local Notif = loadstring(
-	game:HttpGet("https://raw.githubusercontent.com/MaGiXxScripter0/keysystemv2api/master/ui/notify_ui.lua")
-)()
-
--- Main Function
-function KeySystemUI.Main(tabela)
-local function AntiCheatBypass(element)
-    local letras = "qwertyuiopasdfghjklzxcvbnm"
-local letras_embaralhadas = {}
-
--- Embaralhar a string
-for i = 1, #letras do
-  local posicao = math.random(1, #letras)
-  table.insert(letras_embaralhadas, letras:sub(posicao, posicao))
-  letras = letras:sub(1, posicao - 1) .. letras:sub(posicao + 1)
-end
-
--- Imprimir as letras embaralhadas
-for _, letra in ipairs(letras_embaralhadas) do
-if element.Name == "" then
-  element.Name = letra
-else
-   element.Name = element.Name.. letra
-end
-end
+function KeySys.Main(tabela)
+    local Notif = loadstring(game:HttpGet("https://raw.githubusercontent.com/MaGiXxScripter0/keysystemv2api/master/ui/notify_ui.lua"))()
 	local key_system = Instance.new("ScreenGui")
+	key_system.Parent = game:GetService("CoreGui")
 	key_system.IgnoreGuiInset = false
 	key_system.ResetOnSpawn = true
 	key_system.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-	AntiCheatBypass(key_system)
-	key_system.Parent = CoreGUI
+	key_system.Name = "KeySystem"
 	local canvas_group = Instance.new("CanvasGroup")
 	canvas_group.AnchorPoint = Vector2.new(0.5, 0.5)
 	canvas_group.BackgroundColor3 = Color3.new(0.0980392, 0.0980392, 0.0980392)
@@ -151,20 +22,17 @@ end
 	canvas_group.Size = UDim2.new(0, 350, 0, 265)
 	canvas_group.Visible = true
 	canvas_group.Parent = key_system
-	MakeDraggable(canvas_group)
-
 	local uicorner = Instance.new("UICorner")
 	uicorner.CornerRadius = UDim.new(0, 5)
 	uicorner.Parent = canvas_group
-
 	local top_frame = Instance.new("Frame")
+	--MakeDraggable(top_frame)
 	top_frame.BackgroundColor3 = Color3.new(0.105882, 0.105882, 0.105882)
 	top_frame.BorderColor3 = Color3.new(0.113725, 0.113725, 0.113725)
 	top_frame.Size = UDim2.new(1, 0, 0, 40)
 	top_frame.Visible = true
 	top_frame.Name = "TopFrame"
 	top_frame.Parent = canvas_group
-
 	local close_btn = Instance.new("TextButton")
 	close_btn.Font = Enum.Font.SourceSans
 	close_btn.Text = ""
@@ -179,11 +47,9 @@ end
 	close_btn.ZIndex = 2
 	close_btn.Name = "CloseBtn"
 	close_btn.Parent = top_frame
-
 	local uicorner_2 = Instance.new("UICorner")
 	uicorner_2.CornerRadius = UDim.new(0, 5)
 	uicorner_2.Parent = close_btn
-
 	local clear = Instance.new("ImageButton")
 	clear.Image = "rbxassetid://3926305904"
 	clear.ImageColor3 = Color3.new(0.619608, 0.619608, 0.619608)
@@ -199,11 +65,10 @@ end
 	clear.ZIndex = 2
 	clear.Name = "clear"
 	clear.Parent = close_btn
-
 	local text_label = Instance.new("TextLabel")
 	text_label.Font = Enum.Font.Gotham
 	text_label.RichText = true
-	text_label.Text = tostring(tabela.HubName) .. " - <b>Key System</b>"
+	text_label.Text = tostring(tabela.HubName) .. " - Key System"
 	text_label.TextColor3 = Color3.new(0.862745, 0.862745, 0.862745)
 	text_label.TextSize = 14
 	text_label.BackgroundColor3 = Color3.new(1, 1, 1)
@@ -213,17 +78,9 @@ end
 	text_label.Size = UDim2.new(0, 350, 0, 40)
 	text_label.Visible = true
 	text_label.Parent = top_frame
-
 	local text_label_2 = Instance.new("TextLabel")
 	text_label_2.Font = Enum.Font.Gotham
-	if tabela.CustomTextBoxMessage == "" then
-		text_label_2.Text = "To use the free version of "
-			.. tostring(tabela.HubName)
-			.. " you need a key. Click 'Get Key' button to get your key!"
-	else
-		text_label_2.Text = tabela.CustomTextBoxMessage == nil
-				and "To use the free version of " .. tostring(tabela.HubName) .. " you need a key. Click 'Get Key' button to get your key!"
-	end
+	text_label_2.Text = "To use the free version of ".. tabela.HubName.. " you need a key. Click 'Get Key' button to get your key!"
 	text_label_2.TextColor3 = Color3.new(0.784314, 0.784314, 0.784314)
 	text_label_2.TextSize = 14
 	text_label_2.TextWrapped = true
@@ -235,7 +92,6 @@ end
 	text_label_2.Size = UDim2.new(0, 325, 0, 49)
 	text_label_2.Visible = true
 	text_label_2.Parent = canvas_group
-
 	local text_box = Instance.new("TextBox")
 	text_box.CursorPosition = -1
 	text_box.Font = Enum.Font.Gotham
@@ -253,15 +109,12 @@ end
 	text_box.Visible = true
 	text_box.ClearTextOnFocus = false
 	text_box.Parent = canvas_group
-
 	local uicorner_3 = Instance.new("UICorner")
 	uicorner_3.CornerRadius = UDim.new(0, 4)
 	uicorner_3.Parent = text_box
-
 	local uipadding = Instance.new("UIPadding")
 	uipadding.PaddingLeft = UDim.new(0, 15)
 	uipadding.Parent = text_box
-
 	local check_key = Instance.new("TextButton")
 	check_key.Font = Enum.Font.Gotham
 	check_key.Text = "Check Key"
@@ -275,11 +128,9 @@ end
 	check_key.Visible = true
 	check_key.Name = "CheckKey"
 	check_key.Parent = canvas_group
-
 	local uicorner_4 = Instance.new("UICorner")
 	uicorner_4.CornerRadius = UDim.new(0, 4)
 	uicorner_4.Parent = check_key
-
 	local get_key = Instance.new("TextButton")
 	get_key.Font = Enum.Font.Gotham
 	get_key.Text = "Get Key"
@@ -293,7 +144,6 @@ end
 	get_key.Visible = true
 	get_key.Name = "GetKey"
 	get_key.Parent = canvas_group
-
 	local uicorner_5 = Instance.new("UICorner")
 	uicorner_5.CornerRadius = UDim.new(0, 4)
 	uicorner_5.Parent = get_key
@@ -307,29 +157,29 @@ end
 		discord.BackgroundColor3 = Color3.new(0, 0.588235, 0.392157)
 		discord.BorderColor3 = Color3.new(0, 0, 0)
 		discord.BorderSizePixel = 0
-		discord.Position = UDim2.new(0.034285713, 0, 0.819999993, 5)
+		discord.Position = UDim2.new(0.04, 0, 0.8, 5)
 		discord.Size = UDim2.new(0, 325, 0, 35)
 		discord.Visible = true
 		discord.Name = "Discord"
 		discord.Parent = canvas_group
-
 		local uicorner_6 = Instance.new("UICorner")
 		uicorner_6.CornerRadius = UDim.new(0, 4)
 		uicorner_6.Parent = discord
 
 		discord.MouseButton1Click:Connect(function()
-			JoinDiscord(tabela.Discord)
+			setclipboard(tabela.Discord)
+			Notif.new("Copied to clipboard")
 		end)
-	else
+	
 		canvas_group.Size = UDim2.new(0, 350, 0, 185)
 		text_box.Position =
 			UDim2.new(text_box.Position.X.Scale, text_box.Position.X.Offset, text_box.Position.Y.Scale, 10)
 		get_key.Position = UDim2.new(get_key.Position.X.Scale, get_key.Position.X.Offset, get_key.Position.Y.Scale, 20)
 		check_key.Position =
-			UDim2.new(check_key.Position.X.Scale, check_key.Position.X.Offset, check_key.Position.Y.Scale, 20)
+			UDim2.new(check_key.Position.X.Scale, check_key.Position.X.Offset, check_key.Position.Y.Scale - 40, 20)
 	end
 
-	function CloseGUI()
+	local function CloseGUI()
 		game:GetService("TweenService")
 			:Create(
 				canvas_group,
@@ -344,61 +194,15 @@ end
 		key_system:Destroy()
 		UIMade = false
 	end
-
-	close_btn.MouseButton1Click:Connect(function()
-		Closed = true
-		CloseGUI()
-	end)
-
-	local KeySystem
-	local KeyLibrary = KeyLibrary
-		or loadstring(
-			game:HttpGet("https://raw.githubusercontent.com/MaGiXxScripter0/keysystemv2api/master/setup_obf.lua")
-		)()
-	local KeyLibRun, KeyLibError = pcall(function()
-		KeySystem = KeyLibrary.new(tabela.Service, {
-			authType = settings.AuthType,
-		})
-		if KeySystem.AppNameNow then
-			while true do
-			end
-			return
-		end
-	end)
 	
-		if readfile and writefile then
-			local success_file, error_file = pcall(function()
-				local is_key_present = isfile(SavedKeyPath)
-
-				if is_key_present == true then
-					Notif.New("Checking saved key...", 2)
-
-					local key_file_txt = readfile(SavedKeyPath)
-					local onl_key = iskeyvalid(key_file_txt)
-
-					if onl_key then
-						Notif.New("Saved key is valid! Loading " .. tostring(tabela.HubName) .. "...", 5)
-						CloseGUI()
-					else
-						delfile(SavedKeyPath)
-						Notif.New("Saved key is invalid.", 2)
-					end
-				end
-			end)
-			if error_file then
-				Notif.New("Failed to check saved key.", 5)
-				warn(error_file)
-			end
-		end
-
+	close_btn.MouseButton1Click:Connect(CloseGUI)
 		check_key.MouseButton1Click:Connect(function()
-			local keyValid = tabela.PandaAuth:ValidateKey(tabela.Service, text_box.Text)
+	       local keyValid = tabela.PandaAuth:ValidateKey(textbox.Text)
 			if keyValid then
 				if writefile then
-					writefile(SavedKeyPath, text_box.Text)
+					writefile(tabela.HubName.. " Key.txt", textbox.Text)
 				end
 				Notif.New("Key is valid! Loading " .. tabela.HubName.. "...", 5)
-				tabela.NormalScript()
 				CloseGUI()
 			else
 				Notif.New("Invalid/Expired key!", 2)
@@ -407,16 +211,17 @@ end
 		end)
 
 		get_key.MouseButton1Click:Connect(function()
-			text_box.Text = tabela.PandaAuth:GetKey(tabela.Service)
+			text_box.Text = tabela.PandaAuth:GetKey()
 			if setclipboard then
-				setclipboard(tabela.PandaAuth:GetKey(tabela.Service))
-				Notif.New("Copied URL to paste into your browser.", 2)
+				setclipboard(tabela.PandaAuth:GetKey())
+				Notif.new("Copied URL to paste into your browser.", 2)
 			else
-				Notif.New("Your executor doesn't support setclipboard.", 2)
+				Notif.new("Your executor doesn't support setclipboard.", 2)
 			end
 		end)
-		end
-	end
+		
+		
+Notif.new("loaded", 2)
 end
 
-return KeySystemUI
+return KeySys
