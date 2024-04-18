@@ -219,7 +219,7 @@ function KeySys.Main(tabela)
 			Notif.new("Copied URL to paste into your browser.", 2)
 		end)
 		
-		
+end
 Notif.new("loaded", 2)
 
 
