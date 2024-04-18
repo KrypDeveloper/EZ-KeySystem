@@ -197,8 +197,8 @@ function KeySys.Main(tabela)
 	close_btn.MouseButton1Click:Connect(CloseGUI)
 		
 	       local keyValid = function()
-		tabela.PandaAuth:ValidateKey(text_box.Text)
-			if keyValid then
+		
+			if tabela.PandaAuth:ValidateKey(text_box.Text) then
 				if writefile then
 					writefile(tabela.HubName.. " Key.txt", textbox.Text)
 				end
