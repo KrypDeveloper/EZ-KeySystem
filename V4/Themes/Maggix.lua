@@ -148,37 +148,7 @@ function KeySys.Main(tabela)
 	uicorner_5.CornerRadius = UDim.new(0, 4)
 	uicorner_5.Parent = get_key
 
-	--[[if tabela.Discord ~= "" then
-		local discord = Instance.new("TextButton")
-		discord.Font = Enum.Font.Gotham
-		discord.Text = "Join the Discord Server"
-		discord.TextColor3 = Color3.new(1, 1, 1)
-		discord.TextSize = 13
-		discord.BackgroundColor3 = Color3.new(0, 0.588235, 0.392157)
-		discord.BorderColor3 = Color3.new(0, 0, 0)
-		discord.BorderSizePixel = 0
-		discord.Position = UDim2.new(0.04, 0, 0.8, 5)
-		discord.Size = UDim2.new(0, 325, 0, 35)
-		discord.Visible = true
-		discord.Name = "Discord"
-		discord.Parent = canvas_group
-		local uicorner_6 = Instance.new("UICorner")
-		uicorner_6.CornerRadius = UDim.new(0, 4)
-		uicorner_6.Parent = discord
-
-		discord.MouseButton1Click:Connect(function()
-			setclipboard(tabela.Discord)
-			Notif.new("Copied to clipboard")
-		end)
 	
-		canvas_group.Size = UDim2.new(0, 350, 0, 185)
-		text_box.Position =
-			UDim2.new(text_box.Position.X.Scale, text_box.Position.X.Offset, text_box.Position.Y.Scale, 10)
-		get_key.Position = UDim2.new(get_key.Position.X.Scale, get_key.Position.X.Offset, get_key.Position.Y.Scale, 20)
-		check_key.Position =
-			UDim2.new(check_key.Position.X.Scale, check_key.Position.X.Offset, check_key.Position.Y.Scale - 40, 20)
-	end
-]]
 	local function CloseGUI()
 		game:GetService("TweenService")
 			:Create(
@@ -219,11 +189,8 @@ function KeySys.Main(tabela)
 	end
     		get_key.MouseButton1Click:Connect(GetKey)
 			
-		
-		
-
+Notif.new("loaded", 2)
 end
-Notif.New("loaded", 2)
 
 
 return KeySys
