@@ -26,7 +26,6 @@ function KeySys.Main(tabela)
 	uicorner.CornerRadius = UDim.new(0, 5)
 	uicorner.Parent = canvas_group
 	local top_frame = Instance.new("Frame")
-	--MakeDraggable(top_frame)
 	top_frame.BackgroundColor3 = Color3.new(0.105882, 0.105882, 0.105882)
 	top_frame.BorderColor3 = Color3.new(0.113725, 0.113725, 0.113725)
 	top_frame.Size = UDim2.new(1, 0, 0, 40)
@@ -148,7 +147,7 @@ function KeySys.Main(tabela)
 	uicorner_5.CornerRadius = UDim.new(0, 4)
 	uicorner_5.Parent = get_key
 
-	if tabela.Discord ~= "" then
+	--[[if tabela.Discord ~= "" then
 		local discord = Instance.new("TextButton")
 		discord.Font = Enum.Font.Gotham
 		discord.Text = "Join the Discord Server"
@@ -178,7 +177,7 @@ function KeySys.Main(tabela)
 		check_key.Position =
 			UDim2.new(check_key.Position.X.Scale, check_key.Position.X.Offset, check_key.Position.Y.Scale - 40, 20)
 	end
-
+]]
 	local function CloseGUI()
 		game:GetService("TweenService")
 			:Create(
@@ -194,9 +193,10 @@ function KeySys.Main(tabela)
 		key_system:Destroy()
 		UIMade = false
 	end
-	
+	check_key.MouseButton1Click:Connect(function()
+		if tabela.PandaAuth:ValidateKey
 	close_btn.MouseButton1Click:Connect(CloseGUI)
-		check_key.MouseButton1Click:Connect(function()
+		
 	       local keyValid = tabela.PandaAuth:ValidateKey(textbox.Text)
 			if keyValid then
 				if writefile then
@@ -210,14 +210,15 @@ function KeySys.Main(tabela)
 			end
 		end)
 
+		check_key.MouseButton1Click:Connect(keyValid)
+
 		get_key.MouseButton1Click:Connect(function()
 			text_box.Text = tabela.PandaAuth:GetKey()
-			if setclipboard then
 				setclipboard(tabela.PandaAuth:GetKey())
 				Notif.new("Copied URL to paste into your browser.", 2)
-			else
-				Notif.new("Your executor doesn't support setclipboard.", 2)
-			end
+			
+				--Notif.new("Your executor doesn't support setclipboard.", 2)
+			
 		end)
 		
 		
