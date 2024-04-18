@@ -222,6 +222,6 @@ function KeySys.Main(tabela)
 		
 		
 Notif.new("loaded", 2)
-end
+
 
 return KeySys
