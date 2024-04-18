@@ -251,7 +251,7 @@ if tabela.Discord ~= nil then
   Discord.MouseButton1Click:Connect(function()
         setclipboard(tabela.Discord)
         NotifNew("sent to you clipboard", 5)
-   end
+   end)
  end
 UICorner_4.CornerRadius = UDim.new(1, 0)
 UICorner_4.Parent = Discord
