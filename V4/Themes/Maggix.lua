@@ -215,11 +215,8 @@ function KeySys.Main(tabela)
 
 		get_key.MouseButton1Click:Connect(function()
 			text_box.Text = tabela.PandaAuth:GetKey()
-				setclipboard(tabela.PandaAuth:GetKey(tabela.Service))
-				Notif.new("Copied URL to paste into your browser.", 2)
-			
-				--Notif.new("Your executor doesn't support setclipboard.", 2)
-			
+			setclipboard(tabela.PandaAuth:GetKey(tabela.Service))
+			Notif.new("Copied URL to paste into your browser.", 2)
 		end)
 		
 		
