@@ -193,8 +193,7 @@ function KeySys.Main(tabela)
 		key_system:Destroy()
 		UIMade = false
 	end
-	check_key.MouseButton1Click:Connect(function()
-		if tabela.PandaAuth:ValidateKey
+	
 	close_btn.MouseButton1Click:Connect(CloseGUI)
 		
 	       local keyValid = tabela.PandaAuth:ValidateKey(textbox.Text)
