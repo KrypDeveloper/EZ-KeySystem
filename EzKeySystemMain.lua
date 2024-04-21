@@ -195,10 +195,14 @@ Confirm.MouseButton1Click:Connect(function()
      KeyPlace.Text = "Correct Key Loading UI..."
         if tabela.Premium == true then
           tabela.PremiumScript()
-          Main:Destroy()
+          for _,obj in pairs(game:GetService("CoreGui").Main:GetDescendants()) do
+                  obj:Destroy()
+         end
         else
           tabela.NormalScript()
-          Main:Destroy()
+          for _,obj in pairs(game:GetService("CoreGui").Main:GetDescendants()) do
+                  obj:Destroy()
+         end
         end
         writefile(tabela.HubName.. "Key.txt")
      else
@@ -232,7 +236,9 @@ while wait(5) do
       if PandaAuth:Authenticate_Keyless(Service) then
          tabela.NormalScript()
          WhileListWait.Text = "Correct Key! loading UI..."
-         Main:Destroy()
+         for _,obj in pairs(game:GetService("CoreGui").Main:GetDescendants()) do
+                  obj:Destroy()
+         end
          break
       end
    end
