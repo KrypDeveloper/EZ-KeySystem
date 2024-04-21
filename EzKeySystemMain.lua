@@ -4,7 +4,7 @@ function Module.Main(tabela)
 local Service = tabela.Service
 local PandaAuth = tabela.PandaAuth
 
-if PandaAuth:ValidatePremiumKey(Service, readfile(tabela.HubName.. "Key.txt") then
+if PandaAuth:ValidatePremiumKey(Service, readfile(tabela.HubName.. "Key.txt")) then
   if tabela.Premium == true then
      tabela.PremiumScript()
   else
