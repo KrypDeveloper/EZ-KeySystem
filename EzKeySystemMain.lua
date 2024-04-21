@@ -1,16 +1,22 @@
+local active = false
 Module = {}
 
 function Module.Main(tabela)
 local Service = tabela.Service
-local PandaAuth = tabela.PandaAuth
-
-if PandaAuth:ValidatePremiumKey(Service, readfile(tabela.HubName.. "Key.txt")) then
-  if tabela.Premium == true then
-     tabela.PremiumScript()
-  else
-     tabela.NormalScript()
+local PandaAuth = loadstring(game:HttpGet('https://raw.githubusercontent.com/Panda-Repositories/PandaKS_Libraries/main/library/LuaLib/ROBLOX/PandaBetaLib.lua'))()
+if isfile(tabela.HubName.. "Key.txt") then
+   if PandaAuth:ValidatePremiumKey(Service, readfile(tabela.HubName.. "Key.txt")) then
+    if tabela.Premium == true then
+       tabela.PremiumScript()
+       active = true
+    else
+       tabela.NormalScript()
+       active = true
+    end
   end
-else
+elseif not isfile(tabela.HubName.. "Key.txt") or not PandaAuth:ValidatePremiumKey(Service, readfile(tabela.HubName.. "Key.txt")) and active == true then
+print("part 1 inited")
+
 local Main = Instance.new("ScreenGui")
 local MainFrame = Instance.new("Frame")
 local UICorner = Instance.new("UICorner")
@@ -37,7 +43,7 @@ local UICorner_8 = Instance.new("UICorner")
 --Properties:
 
 Main.Name = "Main"
-Main.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+Main.Parent = game:GetService("CoreGui")
 Main.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MainFrame.Name = "MainFrame"
@@ -45,7 +51,7 @@ MainFrame.Parent = Main
 MainFrame.BackgroundColor3 = Color3.fromRGB(22, 22, 29)
 MainFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 MainFrame.BorderSizePixel = 0
-MainFrame.Position = UDim2.new(0.239413679, 0, 0.0859835073, 0)
+MainFrame.Position = UDim2.new(0.5, -300, 0.5, -180)
 MainFrame.Size = UDim2.new(0, 640, 0, 360)
 MainFrame.Draggable = true
 MainFrame.Selectable = true
@@ -124,6 +130,7 @@ Premium_2.BackgroundColor3 = Color3.fromRGB(22, 22, 29)
 Premium_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Premium_2.BorderSizePixel = 0
 Premium_2.Position = UDim2.new(0.239413679, 0, 0.0859835073, 0)
+Premium_2.Visible = false
 Premium_2.Size = UDim2.new(0, 640, 0, 360)
 Premium_2.Draggable = true
 Premium_2.Selectable = true
@@ -234,6 +241,7 @@ end
 UICorner_8.Parent = Clear
 
 end --end of ui
+print("ui loaded")
 
 end --end of function
 
