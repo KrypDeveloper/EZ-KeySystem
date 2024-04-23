@@ -2,8 +2,9 @@ local active = false
 local KeyPlace = Instance.new("TextBox")
 Module = {}
 
-function Module.IsPremium(Service)
-  if PandaAuth:ValidatePremiumKey(Service, KeyPlace.Text) then
+function Module.IsPremium(Service, HubName)
+  local key = readfile(HubName.. "Key.txt")
+  if PandaAuth:ValidatePremiumKey(Service, key) then
       return true
    else
       return false
@@ -202,6 +203,7 @@ Confirm.MouseButton1Click:Connect(function()
      if PandaAuth:ValidatePremiumKey(Service, KeyPlace.Text) then
      KeyPlace.Text = "Correct Key Loading UI..."
         if tabela.Premium == true then
+            writefile(tabela.HubName.. "Key.txt", KeyPlace.Text)
           tabela.PremiumScript()
           for _,obj in pairs(game:GetService("CoreGui").Main:GetDescendants()) do
                   obj:Destroy()
