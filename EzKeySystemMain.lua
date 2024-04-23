@@ -1,8 +1,9 @@
 local active = false
+local KeyPlace = Instance.new("TextBox")
 Module = {}
 
-function Module.IsPremium(Service, tetbox)
-  if PandaAuth:ValidatePremiumKey(Service, textbox)
+function Module.IsPremium(Service)
+  if PandaAuth:ValidatePremiumKey(Service, KeyPlace.Text)
       return true
    else
       return false
@@ -42,7 +43,6 @@ local UICorner_5 = Instance.new("UICorner")
 local PremiumTitle = Instance.new("TextLabel")
 local UICorner_6 = Instance.new("UICorner")
 local ImageButton = Instance.new("ImageButton")
-local KeyPlace = Instance.new("TextBox")
 local Confirm = Instance.new("TextButton")
 local UICorner_7 = Instance.new("UICorner")
 local Clear = Instance.new("TextButton")
