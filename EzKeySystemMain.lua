@@ -1,6 +1,14 @@
 local active = false
 Module = {}
 
+function Module.IsPremium(Service, tetbox)
+  if PandaAuth:ValidatePremiumKey(Service, textbox)
+      return true
+   else
+      return false
+   end
+end
+
 function Module.Main(tabela)
 local Service = tabela.Service
 local PandaAuth = loadstring(game:HttpGet('https://raw.githubusercontent.com/Panda-Repositories/PandaKS_Libraries/main/library/LuaLib/ROBLOX/PandaBetaLib.lua'))()
