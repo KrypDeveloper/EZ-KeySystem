@@ -4,6 +4,8 @@ Module = {}
 
 function Module.IsPremium(Service, HubName)
   local key = readfile(HubName.. "Key.txt")
+  local PandaAuth = loadstring(game:HttpGet('https://raw.githubusercontent.com/Panda-Repositories/PandaKS_Libraries/main/library/LuaLib/ROBLOX/PandaBetaLib.lua'))()
+
   if PandaAuth:ValidatePremiumKey(Service, key) then
       return true
    else
