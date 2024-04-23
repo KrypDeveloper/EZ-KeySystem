@@ -3,7 +3,7 @@ local KeyPlace = Instance.new("TextBox")
 Module = {}
 
 function Module.IsPremium(Service)
-  if PandaAuth:ValidatePremiumKey(Service, KeyPlace.Text)
+  if PandaAuth:ValidatePremiumKey(Service, KeyPlace.Text) then
       return true
    else
       return false
