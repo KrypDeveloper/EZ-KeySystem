@@ -1,17 +1,5 @@
 local active = false
-local KeyPlace = Instance.new("TextBox")
 Module = {}
-
-function Module.IsPremium(Service, HubName)
-  local key = readfile(HubName.. "Key.txt")
-  local PandaAuth = loadstring(game:HttpGet('https://raw.githubusercontent.com/Panda-Repositories/PandaKS_Libraries/main/library/LuaLib/ROBLOX/PandaBetaLib.lua'))()
-
-  if PandaAuth:ValidatePremiumKey(Service, key) then
-      return true
-   else
-      return false
-   end
-end
 
 function Module.Main(tabela)
 local Service = tabela.Service
@@ -30,6 +18,7 @@ elseif not isfile(tabela.HubName.. "Key.txt") or not PandaAuth:ValidatePremiumKe
 print("part 1 inited")
 
 local Main = Instance.new("ScreenGui")
+local KeyPlace = Instance.new("TextBox")
 local MainFrame = Instance.new("Frame")
 local UICorner = Instance.new("UICorner")
 local Title = Instance.new("TextLabel")
@@ -189,6 +178,7 @@ KeyPlace.PlaceholderText = "Please place your key here"
 KeyPlace.Text = ""
 KeyPlace.TextColor3 = Color3.fromRGB(0, 0, 0)
 KeyPlace.TextSize = 20.000
+KeyPlace.TextColor3 = Color3.fromRGB(0, 0, 0)
 
 Confirm.Name = "Confirm"
 Confirm.Parent = Premium_2
@@ -204,8 +194,8 @@ Confirm.TextSize = 30.000
 Confirm.MouseButton1Click:Connect(function()
      if PandaAuth:ValidatePremiumKey(Service, KeyPlace.Text) then
      KeyPlace.Text = "Correct Key Loading UI..."
+    writefile(tabela.HubName.. "Key.txt", KeyPlace.Text)
         if tabela.Premium == true then
-            writefile(tabela.HubName.. "Key.txt", KeyPlace.Text)
           tabela.PremiumScript()
           for _,obj in pairs(game:GetService("CoreGui").Main:GetDescendants()) do
                   obj:Destroy()
@@ -216,7 +206,7 @@ Confirm.MouseButton1Click:Connect(function()
                   obj:Destroy()
          end
         end
-        writefile(tabela.HubName.. "Key.txt")
+        writefile(tabela.HubName.. "Key.txt", KeyPlace.Text)
      else
         game.StarterGui:SetCore("SendNotification", {
         	Title = HubName,
