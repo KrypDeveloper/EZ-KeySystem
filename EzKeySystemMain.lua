@@ -2,6 +2,9 @@ local active = false
 Module = {}
 
 function Module.Main(tabela)
+   if game:GetService("CoreGui").Main then
+      print("alredy running!")
+   else
 local Service = tabela.Service
 local PandaAuth = loadstring(game:HttpGet('https://raw.githubusercontent.com/Panda-Repositories/PandaKS_Libraries/main/library/LuaLib/ROBLOX/PandaBetaLib.lua'))()
 if isfile(tabela.HubName.. "Key.txt") then
@@ -15,7 +18,6 @@ if isfile(tabela.HubName.. "Key.txt") then
     end
   end
 elseif not isfile(tabela.HubName.. "Key.txt") or not PandaAuth:ValidatePremiumKey(Service, readfile(tabela.HubName.. "Key.txt")) and active == true then
-print("part 1 inited")
 
 local Main = Instance.new("ScreenGui")
 local KeyPlace = Instance.new("TextBox")
@@ -117,8 +119,20 @@ GetKey.Text = "Get Key"
 GetKey.TextColor3 = Color3.fromRGB(0, 0, 0)
 GetKey.TextSize = 30.000
 GetKey.MouseButton1Click:Connect(function()
+   if clipboard then
     setclipboard(PandaAuth:GetKey(Service))
-end)
+    startergui:SetCore("SendNotification",{
+		Title = tabela.HubName,
+		Text = "sent to clipboard!",
+		Duration = 2
+	})
+else
+   startergui:SetCore("SendNotification",{
+		Title = tabela.HubName,
+		Text = "No support for setclipboard",
+		Duration = 2
+	})
+end
 
 UICorner_4.Parent = GetKey
 
@@ -193,25 +207,21 @@ Confirm.TextColor3 = Color3.fromRGB(0, 0, 0)
 Confirm.TextSize = 30.000
 Confirm.MouseButton1Click:Connect(function()
      if PandaAuth:ValidatePremiumKey(Service, KeyPlace.Text) then
-     KeyPlace.Text = "Correct Key Loading UI..."
-    writefile(tabela.HubName.. "Key.txt", KeyPlace.Text)
-        if tabela.Premium == true then
-          tabela.PremiumScript()
-          for _,obj in pairs(game:GetService("CoreGui").Main:GetDescendants()) do
-                  obj:Destroy()
+         writefile(tabela.HubName.. "Key.txt", KeyPlace.Text)
+         KeyPlace.Text = "Correct Key Loading UI..."
+         if tabela.Premium == true then
+            tabela.PremiumScript()
+            Main.Parent = game.ReplicatedStorage;Main:Destroy()
+          else
+            tabela.NormalScript()
+            Main.Parent = game.ReplicatedStorage;Main:Destroy()
          end
-        else
-          tabela.NormalScript()
-          for _,obj in pairs(game:GetService("CoreGui").Main:GetDescendants()) do
-                  obj:Destroy()
-         end
-        end
-        writefile(tabela.HubName.. "Key.txt", KeyPlace.Text)
+
      else
         game.StarterGui:SetCore("SendNotification", {
-        	Title = HubName,
-        	Text = "Invalid Key",
-        	Duration = 3
+           Title = HubName,
+        	  Text = "Invalid Key",
+        	  Duration = 3
          })
      end
 end)
@@ -232,25 +242,20 @@ Clear.TextSize = 30.000
 Clear.MouseButton1Click:Connect(function()
     KeyPlace.Text = ""
 end)
-
-while wait(5) do
+UICorner_8.Parent = Clear
+while true do
    if tabela.LoopKeyless == true then
-      if PandaAuth:Authenticate_Keyless(Service) then
-         tabela.NormalScript()
-         WhileListWait.Text = "Correct Key! loading UI..."
-         for _,obj in pairs(game:GetService("CoreGui").Main:GetDescendants()) do
-                  obj:Destroy()
-         end
-         break
-      end
+       if PandaAuth:Authenticate_Keyless(Service) then
+           tabela.NormalScript()
+           WhileListWait.Text = "Correct Key! loading UI..."
+           Main.Parent = game.ReplicatedStorage;Main:Destroy()
+           break
+       end
    end
+   wait(5)
 end
 
-UICorner_8.Parent = Clear
-
-end --end of ui
-print("ui loaded")
-
-end --end of function
-
+end --end of if
+end -- end of elseif block
+end -- end of Module.Main function
 return Module
