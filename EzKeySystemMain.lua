@@ -193,20 +193,14 @@ Confirm.TextColor3 = Color3.fromRGB(0, 0, 0)
 Confirm.TextSize = 30.000
 Confirm.MouseButton1Click:Connect(function()
      if PandaAuth:ValidatePremiumKey(Service, KeyPlace.Text) then
+     writefile(tabela.HubName.. "Key.txt", KeyPlace.Text)
      KeyPlace.Text = "Correct Key Loading UI..."
-    writefile(tabela.HubName.. "Key.txt", KeyPlace.Text)
         if tabela.Premium == true then
           tabela.PremiumScript()
-          for _,obj in pairs(game:GetService("CoreGui").Main:GetDescendants()) do
-                  obj:Destroy()
-         end
         else
           tabela.NormalScript()
-          for _,obj in pairs(game:GetService("CoreGui").Main:GetDescendants()) do
-                  obj:Destroy()
-         end
         end
-        writefile(tabela.HubName.. "Key.txt", KeyPlace.Text)
+        
      else
         game.StarterGui:SetCore("SendNotification", {
         	Title = HubName,
@@ -238,9 +232,6 @@ while wait(5) do
       if PandaAuth:Authenticate_Keyless(Service) then
          tabela.NormalScript()
          WhileListWait.Text = "Correct Key! loading UI..."
-         for _,obj in pairs(game:GetService("CoreGui").Main:GetDescendants()) do
-                  obj:Destroy()
-         end
          break
       end
    end
