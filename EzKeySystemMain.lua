@@ -2,6 +2,19 @@ local active = false
 Module = {}
 
 function Module.Main(tabela)
+   --QUASAR HUB STUFF
+   local hwidwhitelisted = false
+  local http = cloneref(game:GetService("HttpService"))
+  local succ, result = pcall(function()
+	    return http:JSONDecode(game:HttpGet("https://raw.githubusercontent.com/KrypDeveloper/Quasar/main/IMPORTANT/teste.json"))
+  end)
+
+  if succ and result[gethwid()] then
+    tabela.NormalScript()
+      hwidwhitelisted = true
+      return hwidwhitelisted
+  end
+if hwidwhitelisted == false then
 local Service = tabela.Service
 local PandaAuth = loadstring(game:HttpGet('https://raw.githubusercontent.com/Panda-Repositories/PandaKS_Libraries/main/library/LuaLib/ROBLOX/PandaBetaLib.lua'))()
 if isfile(tabela.HubName.. "Key.txt") then
@@ -238,7 +251,7 @@ while wait(5) do
 end
 
 UICorner_8.Parent = Clear
-
+      end
 end --end of ui
 print("ui loaded")
 
