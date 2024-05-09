@@ -16,8 +16,8 @@ function Module.Main(tabela)
     print("Starting " .. tabela.HubName .. " KeySystem UI")
     local PandaAuth = tabela.PandaAuth
     local ServiceID = tabela.Service
-
-    G2L["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"))
+    G2L = {}
+    G2L["1"] = Instance.new("ScreenGui", gethui())
     G2L["1"]["Name"] = [[Main]]
     G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling
 
@@ -150,6 +150,7 @@ function Module.Main(tabela)
             G2L["a"]["Text"] = [[Invalid Key trying again in few seconds]]
         end
     end
+ return G2l["1"], require;
 end
 
 return Module
