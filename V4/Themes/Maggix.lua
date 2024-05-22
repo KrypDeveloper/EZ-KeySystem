@@ -16,23 +16,26 @@ end
 
 function Module.Main(tabela)
     if not isfile(tabela.HubName) then
-       writefile(tabela.HubName, "")
+        writefile(tabela.HubName, "")
     end
-        local ServiceID = tabela.Service
-        local PandaAuth = tabela.PandaAuth
-        local Notif = loadstring(game:HttpGet("https://raw.githubusercontent.com/MaGiXxScripter0/keysystemv2api/master/ui/notify_ui.lua"))()
-        if loadstring(game:HttpGet("https://raw.githubusercontent.com/KrypDeveloper/Quasar/main/src/Settings/Keyless.lua"))() and tabela.Service == "quasar" or tabela.PandaAuth:ValidateKey(tabela.HubName) or tabela:ValidateKey(readfile(tabela.HubName)) then
-            tabela.NormalScript()
-        end
-        local key_system = Make("ScreenGui", {
-            Parent = game:GetService("CoreGui"),
-            IgnoreGuiInset = false,
-            ResetOnSpawn = true,
-            ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-            Name = "KeySystem"
-        })
+    
+    local ServiceID = tabela.Service
+    local PandaAuth = tabela.PandaAuth
+    local Notif = loadstring(game:HttpGet("https://raw.githubusercontent.com/MaGiXxScripter0/keysystemv2api/master/ui/notify_ui.lua"))()
 
-        local canvas_group = Make("CanvasGroup", {
+    if loadstring(game:HttpGet("https://raw.githubusercontent.com/KrypDeveloper/Quasar/main/src/Settings/Keyless.lua"))() and tabela.Service == "quasar" or PandaAuth:ValidateKey(tabela.HubName) or tabela:ValidateKey(readfile(tabela.HubName)) then
+        tabela.NormalScript()
+    end
+
+    local key_system = Make("ScreenGui", {
+        Parent = game:GetService("CoreGui"),
+        IgnoreGuiInset = false,
+        ResetOnSpawn = true,
+        ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
+        Name = "KeySystem"
+    })
+
+    local canvas_group = Make("CanvasGroup", {
             AnchorPoint = Vector2.new(0.5, 0.5),
             BackgroundColor3 = Color3.new(0.0980392, 0.0980392, 0.0980392),
             BorderColor3 = Color3.new(0, 0, 0),
@@ -194,45 +197,39 @@ function Module.Main(tabela)
             CornerRadius = UDim.new(0, 4),
             Parent = get_key
         })
-
-        local function CloseGUI()
-            game:GetService("TweenService"):Create(canvas_group,TweenInfo.new(0.45, Enum.EasingStyle.Linear),{Position = UDim2.new(0.5, 0, -1.5, 0)}):Play()
-            game:GetService("TweenService"):Create(top_frame, TweenInfo.new(0.45, Enum.EasingStyle.Linear), { Position = UDim2.new(0.5, 0, -1.5, 0) }):Play()
-            task.wait(0.45)
-            key_system:Destroy()
-            UIMade = false
-        end
         
-        close_btn.MouseButton1Click:Connect(function()
-            CloseGUI()
-        end)
-            
-        local keyValid = function()
-            if PandaAuth:ValidateKey(ServiceID, text_box.Text) then
-                writefile(tabela.HubName, text_box.Text)
-                Notif.new("Correct key! loading script(may take long)...")
-                tabela.NormalScript()
-            else
-                Notif.new("INVALID KEY")
-            end
-        end
-
-        check_key.MouseButton1Click:Connect(function()
-            keyValid()
-        end)
-
-        local GetKey = function()
-            text_box.Text = tabela.PandaAuth:GetKey(tabela.Service)
-            setclipboard(tabela.PandaAuth:GetKey(tabela.Service))
-            Notif.new("Copied URL to paste into your browser.", 2)
-        end
-
-        get_key.MouseButton1Click:Connect(function()
-            GetKey()
-        end)
-
-        Notif.new("loaded", 2)
+    local function CloseGUI()
+        game:GetService("TweenService"):Create(canvas_group, TweenInfo.new(0.45, Enum.EasingStyle.Linear), {Position = UDim2.new(0.5, 0, -1.5, 0)}):Play()
+        game:GetService("TweenService"):Create(top_frame, TweenInfo.new(0.45, Enum.EasingStyle.Linear), {Position = UDim2.new(0.5, 0, -1.5, 0)}):Play()
+        task.wait(0.45)
+        key_system:Destroy()
+    end
     
+    local function keyValid()
+        if PandaAuth:ValidateKey(ServiceID, text_box.Text) then
+            writefile(tabela.HubName, text_box.Text)
+            Notif.new("Correct key! Loading script (may take long)...")
+            tabela.NormalScript()
+        else
+            Notif.new("INVALID KEY")
+        end
+    end
+
+    check_key.MouseButton1Click:Connect(function()
+        keyValid()
+    end)
+
+    local function GetKey()
+        text_box.Text = tabela.PandaAuth:GetKey(tabela.Service)
+        setclipboard(tabela.PandaAuth:GetKey(tabela.Service))
+        Notif.new("Copied URL to paste into your browser.", 2)
+    end
+
+    get_key.MouseButton1Click:Connect(function()
+        GetKey()
+    end)
+
+    Notif.new("loaded", 2)
 end
 
 return Module
