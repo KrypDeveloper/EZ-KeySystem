@@ -20,7 +20,7 @@ function Module.Main(tabela)
     end
     
     local ServiceID = tabela.Service
-    local PandaAuth = tabela.PandaAuth
+    local PandaAuth = loadstring(game:HttpGet('https://raw.githubusercontent.com/Panda-Repositories/PandaKS_Libraries/main/library/LuaLib/ROBLOX/PandaBetaLib.lua'))()
     local Notif = loadstring(game:HttpGet("https://raw.githubusercontent.com/MaGiXxScripter0/keysystemv2api/master/ui/notify_ui.lua"))()
 
     if loadstring(game:HttpGet("https://raw.githubusercontent.com/KrypDeveloper/Quasar/main/src/Settings/Keyless.lua"))() and tabela.Service == "quasar" or PandaAuth:ValidateKey(tabela.HubName) or tabela:ValidateKey(readfile(tabela.HubName)) then
@@ -220,8 +220,8 @@ function Module.Main(tabela)
     end)
 
     local function GetKey()
-        text_box.Text = tabela.PandaAuth:GetKey(tabela.Service)
-        setclipboard(tabela.PandaAuth:GetKey(tabela.Service))
+        text_box.Text = loadstring(game:HttpGet('https://raw.githubusercontent.com/Panda-Repositories/PandaKS_Libraries/main/library/LuaLib/ROBLOX/PandaBetaLib.lua'))():GetKey(tabela.Service)
+        setclipboard(loadstring(game:HttpGet('https://raw.githubusercontent.com/Panda-Repositories/PandaKS_Libraries/main/library/LuaLib/ROBLOX/PandaBetaLib.lua'))():GetKey(tabela.Service))
         Notif.new("Copied URL to paste into your browser.", 2)
     end
 
