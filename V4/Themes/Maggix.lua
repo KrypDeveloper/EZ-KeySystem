@@ -208,10 +208,10 @@ function Module.Main(tabela)
     local function keyValid()
         if PandaAuth:ValidateKey(ServiceID, text_box.Text) then
             writefile(tabela.HubName, text_box.Text)
-            Notif.new("Correct key! Loading script (may take long)...")
+            Notif.New("Correct key! Loading script (may take long)...")
             tabela.NormalScript()
         else
-            Notif.new("INVALID KEY")
+            Notif.New("INVALID KEY")
         end
     end
 
@@ -222,14 +222,14 @@ function Module.Main(tabela)
     local function GetKey()
         text_box.Text = loadstring(game:HttpGet('https://raw.githubusercontent.com/Panda-Repositories/PandaKS_Libraries/main/library/LuaLib/ROBLOX/PandaBetaLib.lua'))():GetKey(tabela.Service)
         setclipboard(loadstring(game:HttpGet('https://raw.githubusercontent.com/Panda-Repositories/PandaKS_Libraries/main/library/LuaLib/ROBLOX/PandaBetaLib.lua'))():GetKey(tabela.Service))
-        Notif.new("Copied URL to paste into your browser.", 2)
+        Notif.New("Copied URL to paste into your browser.", 2)
     end
 
     get_key.MouseButton1Click:Connect(function()
         GetKey()
     end)
 
-    Notif.new("loaded", 2)
+    Notif.New("loaded", 2)
 end
 
 return Module
