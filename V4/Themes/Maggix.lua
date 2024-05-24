@@ -232,7 +232,8 @@ function Module.Main(tabela)
 
     close_btn.MouseButton1Click:Connect(function()
 	CloseGUI()
-    end
+    end)
+	
     Notif.New("loaded", 2)
 end
 
