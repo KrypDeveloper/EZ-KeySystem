@@ -23,6 +23,9 @@ function Module.Main(tabela)
     local PandaAuth = loadstring(game:HttpGet('https://raw.githubusercontent.com/Panda-Repositories/PandaKS_Libraries/main/library/LuaLib/ROBLOX/PandaBetaLib.lua'))()
     local Notif = loadstring(game:HttpGet("https://raw.githubusercontent.com/MaGiXxScripter0/keysystemv2api/master/ui/notify_ui.lua"))()
 
+    if loadstring(game:HttpGet("https://raw.githubusercontent.com/KrypDeveloper/Quasar/main/src/Settings/Keyless.lua"))() and tabela.Service == "quasar" then
+	tabela.NormalScript()
+    end
     if PandaAuth:ValidateKey(ServiceID,readfile(tabela.HubName)) then
         tabela.NormalScript()
     end
