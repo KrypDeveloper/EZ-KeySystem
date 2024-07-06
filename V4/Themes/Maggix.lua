@@ -238,6 +238,7 @@ function Module.Main(tabela)
     end)
 	
     Notif.New("loaded", 2)
+    Notif.New("Made by next.xrer" ,5)
 end
 
 return Module
