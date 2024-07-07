@@ -1,4 +1,5 @@
 # Docs
+# User
 ## SetGetKey
 ``SetGetKey defines a function to be fired after player click in get key button inside the ui``
 ### Example
@@ -16,6 +17,7 @@ Window:SetCheckKey(function(Key)
     print("Check Key Button fired with the key:".. Key)
 end)
 ```
+# Coder
 # PRE-INFO
 ``when window is created it comes with some informations like HubName and Discord``
 ## Discord Path
