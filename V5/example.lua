@@ -21,7 +21,8 @@ else
             Data = {
                 HubName = "Quasar Hub"
             },
-            Discord = "https://discord.com/invite/ugfag6bq"
+            Discord = "https://discord.com/invite/ugfag6bq",
+            Blur = false
         }
     )
 
