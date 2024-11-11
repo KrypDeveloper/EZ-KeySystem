@@ -131,7 +131,7 @@ else
             if Validate(key) then
                 print("Whitelisted")
                 script()
-                writefile("Pelinda Data/Quasar Hub/Key.txt", key)
+                writefile("Pelinda Data/".. HubName.. "/Key.txt", key)
                 Window:DestroyGui()
             end
         end
