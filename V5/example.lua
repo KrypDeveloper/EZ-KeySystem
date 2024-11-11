@@ -1,28 +1,31 @@
+local Settings = {
+    Type = "Key",
+    UI = "MaggixV2"
+    HubName = "Quasar Hub",
+    Discord = "https://discord.com/invite/ugfag6bq",
+    Blur = false
+}
+
 local Type = "Key"
 local UI = "MaggixV2"
-local KeySys =
-    loadstring(
-    game:HttpGet(
-        "https://raw.githubusercontent.com/KrypDeveloper/EZ-KeySystem/main/V5/UIS/" .. Type .. "/" .. UI .. ".lua"
-    )
-)()
+local KeySys = loadstring(game:HttpGet("https://raw.githubusercontent.com/KrypDeveloper/EZ-KeySystem/main/V5/UIS/" .. Settings Type .. "/" .. Settings.UI .. ".lua"))()
 
-local ValidateFunctionYouWant = function(ki)
-    print(ki)
+local Validate = function(key)
+    print(key)
     return true
 end
 
-if isfile("Pelinda Data/Quasar Hub/Key.txt") and ValidateFunctionYouWant(readfile("Pelinda Data/Quasar Hub/Key.txt")) then
+if isfile("Pelinda Data/".. Settings.HubName.. "/Key.txt") and Validate(readfile("Pelinda Data/".. Settings.HubName.. "/Key.txt")) then
     print("Validated!")
 else
     local Window =
         KeySys:CreateGui(
         {
             Data = {
-                HubName = "Quasar Hub"
+                HubName = HubName
             },
-            Discord = "https://discord.com/invite/ugfag6bq",
-            Blur = false
+            Discord = Settings.Discord
+            Blur = Settings.Blur
         }
     )
 
@@ -34,9 +37,9 @@ else
 
     Window:SetCheckKey(
         function(key)
-            if ValidateFunctionYouWant(key) then
+            if Validate(key) then
                 print("Whitelisted")
-                writefile("Pelinda Data/Quasar Hub/Key.txt", key)
+                writefile("Pelinda Data/".. Settings.HubName.. "/Key.txt", key)
                 Window:DestroyGui()
             end
         end
